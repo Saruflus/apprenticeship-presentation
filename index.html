@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soutenance d'alternance — Merlin Simsen Baratault</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Reveal.js CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/white.css" id="theme">
+
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/monokai.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/tokyo-night-dark.min.css">
+
+  <style>
+    :root { --r-main-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    body, .reveal { font-family: var(--r-main-font) !important; }
+    .reveal h1, .reveal h2, .reveal h3 { font-weight: 800; letter-spacing: -0.025em; }
+    .reveal p, .reveal li { font-weight: 450; }
+    .logos { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .logos img { height: 80px; object-fit: contain; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .two-col img { width: 100%; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    #chart { width: 100%; height: 62vh; max-height: 720px; }
+    .caption { color:#666; font-size: .9em; margin-top: .6rem; }
+    .center { text-align:center; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. TITRE -->
+    <section>
+      <p class="r-fit-text"><strong>SOUTENANCE D'ALTERNANCE</strong></p>
+      <h3>Alternance au CEREDIH (Hôpital Necker, AP-HP)</h3>
+      <p class="caption">missions, apports, compétences développées</p>
+      <br>
+
+
+      <p style="font-size: 0.7em; color: #666"><strong>Merlin Simsen Baratault</strong> - BUT3 SD EMS</p>
+      <div class="logos">
+        <img src="assets/LOGO_CEREDIH.png" alt="Logo du CEREDIH" />
+        <img src="assets/LOGO_APHP.png" alt="Logo de l'AP-HP" />
+        <img src="assets/LOGO_UPC.png" alt="Logo de l'Université Paris Cité" />
+      </div>
+    </section>
+
+
+
+    <!-- 1. INTRODUCTION (1 slide) -->
+    <section>
+      <h1>Introduction</h1>
+      <ul>
+        <li>Présentation : <strong>Merlin Simsen Baratault</strong>, BUT3 Science des Données - alternant</li>
+        <li>Contexte : <strong style="color: #0a4d9d;">CEREDIH</strong> — Hôpital Necker (AP-HP)</li>
+        <li>Encadrants : maître d'alternance & tuteur IUT</li>
+        <li>Objectif : présenter mes <strong>missions</strong>, mes <strong>apports</strong>, et les <strong>compétences</strong> développées</li>
+      </ul>
+    </section>
+
+
+
+    <!-- 2. CEREDIH & Service Data/Stats (2 slides) -->
+    <section>
+      <h1 class="r-fit-text">CEREDIH & service Data/Statistique</h1>
+        <div class="two-col">
+          <div>
+            <ul style="font-size: 1em;">
+              <li>Registre national des <strong style="color: #0a4d9d;">déficits immunitaires</strong></li>
+              <li>Gestion du <strong>réseau</strong> français & participant au niveau européen</li>
+              <li>Valorisation clinique & recherche</li>
+            </ul>
+            <p class="caption">Importance de la donnée de santé : qualité, confidentialité, volume</p>
+          </div>
+          <div>
+            <ul style="font-size: 1em;">
+              <li>Équipes : ARC, Docteurs, Data</li>
+              <li>Service Data : collecte, QA, analyses, reporting</li>
+              <li>Mon rôle : alternant Data - interface avec l'équipe médicale</li>
+            </ul>
+          </div>
+        </div>
+    </section>
+
+
+
+    <!-- 3. Aperçu global des missions (1 slide) -->
+    <section>
+      <h2>Aperçu de mes missions</h2>
+      <ul>
+        <li><strong>Refonte du Data Management</strong> (optimisation, robustesse, lisibilité)</li>
+        <li><strong>Modernisation</strong> du rapport d'activité & newsletter</li>
+        <li>Rédaction d'un <strong>article méthodologique</strong> sur le modèle de <strong>Cox</strong></li>
+      </ul>
+      <p class="caption">→ Focus détaillé : missions 1 & 2 • L'article en point fort final</p>
+    </section>
+
+    <!-- 4. MISSION 1 – 3 slides -->
+    <section>
+      <h2>Mission 1 — Refonte du Data Management</h2>
+      <h4>Contexte & objectifs</h4>
+      <ul>
+        <li>Scripts historiques (~9000 lignes), compilation ~<strong>2h</strong>, erreurs fréquentes</li>
+        <li>Objectifs : <strong>rapidité</strong>, <strong>robustesse</strong>, <strong>lisibilité</strong></li>
+        <li>Démarche : analyse, <em>vectorisation</em> (apply/mapply), modularisation</li>
+      </ul>
+    </section>
+
+    <section>
+  <h2>Mission 1 — Avant</h2>
+  <pre><code class="language-r" data-line-numbers="1-13|2|2,5|2,5,7|2,5,7,9"># Boucle lente et fragile
+for (i in 1:nrow(Esid))
+{
+  x &lt; rep(NA, length(IG_date))
+	for (j in &:length(IG_date))
+	{
+	  if (as.character(Esid[i, IG_status[j]]) %in% "Y")
+	  {
+	    Esid$date_first_IG_replacement[i] &lt;- date_ceredih(Esid[i, IG_date[j]])
+	    break()
+	  }
+	}
+}
+</code></pre>
+  <p class="caption">Problèmes : passages cellule par cellule, conditions répétitives, risques d'erreurs d'indexation.</p>
+</section>
+
+
+    <section>
+      <h2>Mission 1 — Après</h2>
+      <pre><code class="language-r" data-line-numbers="1-5|2"># Vectorisation claire et robuste
+Esid$date_first_IG_replacement &lt;- mapply(extract_element,
+        which(is.na(Esid$first_ig_replacement)),
+        Esid$first_ig_replacement[which(is.na(Esid$first_ig_replacement))],
+        MoreArgs = list(base = Esid[, IG_date]))
+</code></pre>
+      <ul>
+        <li>Temps total réduit : <strong>~2h → ~15 min</strong></li>
+        <li>Processus plus <strong>fiable</strong> & <strong>maintenable</strong></li>
+        <li>Gain d’<strong>autonomie</strong> & réactivité pour l’équipe</li>
+      </ul>
+    </section>
+
+    <!-- 5. MISSION 2 – 3 slides -->
+    <section>
+      <h2>Mission 2 — Rapport d’activité & Newsletter</h2>
+      <h4>Contexte</h4>
+      <ul>
+        <li>Rapport peu lisible, graphiques figés, limites du Rmd classique</li>
+        <li>Objectifs : moderniser, rendre <strong>interactif</strong>, mieux valoriser les données</li>
+      </ul>
+      <img src="ancien_rapport.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
+    </section>
+
+    <section>
+      <h2>Mission 2 — Exemple de dataviz interactive</h2>
+      <div id="chart" aria-label="Graphique interactif Apache ECharts"></div>
+      <p class="caption">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
+    </section>
+
+    <section>
+      <h2>Mission 2 — Résultats</h2>
+      <ul>
+        <li>Rapport <strong>interactif</strong> (≈70 pages) — utilisé en congrès</li>
+        <li>Newsletter modernisée & personnalisable</li>
+        <li>Ajout d’analyses (ex. <strong>courbes de survie</strong>)</li>
+        <li>Meilleure valorisation auprès des médecins & partenaires</li>
+      </ul>
+    </section>
+
+    <!-- 6. MISSION 3 – 2 slides (2 images requis) -->
+    <section>
+      <h2>Mission 3 — Article méthodologique (modèle de Cox)</h2>
+      <ul>
+        <li>Suite d’un papier sur <em>Kaplan‑Meier</em> → besoin d’un guide clair pour cliniciens</li>
+        <li>Objectifs : expliquer biais (troncature, censure, risques compétitifs, événements récurrents, interactions…)</li>
+        <li>Méthode : simulation (Weibull), comparaison modèles naïfs vs corrigés, illustrations (HR & courbes)</li>
+        <li>Résultat : article en cours de finalisation • gain d’expertise méthodo & communication scientifique</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Mission 3 — Illustrations</h2>
+      <div class="two-col">
+        <img src="article_fig1.png" alt="Figure 1 — Illustration Cox" />
+        <img src="article_fig2.png" alt="Figure 2 — Illustration Cox" />
+      </div>
+      <p class="caption center">Remplacez par vos figures (ex. HR, courbes de survie, schémas de biais).</p>
+    </section>
+
+    <!-- 7. PORTFOLIO – 2–3 slides -->
+    <section>
+      <h2>Portfolio — Compétences du BUT SD</h2>
+      <ul>
+        <li><strong>Traiter des données</strong> → refonte du Data Management</li>
+        <li><strong>Analyser statistiquement</strong> → article Cox</li>
+        <li><strong>Valoriser une production</strong> → rapport d’activité / newsletter</li>
+        <li><strong>Modéliser les données</strong> → modèles de survie avancés</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Portfolio — Compétences transversales</h2>
+      <ul>
+        <li>Autoformation & veille</li>
+        <li>Gestion de projet & priorisation</li>
+        <li>Communication interdisciplinaire (clinique ↔ data)</li>
+        <li>Qualité & documentation</li>
+      </ul>
+    </section>
+
+    <!-- 8. BILAN & PERSPECTIVES (1 slide) -->
+    <section>
+      <h2>Bilan & perspectives</h2>
+      <ul>
+        <li><strong>Techniques</strong> : R, data management, analyse de survie, dataviz interactive</li>
+        <li><strong>Professionnelles</strong> : rigueur, vulgarisation scientifique, travail en équipe médicale</li>
+        <li><strong>Perspectives</strong> : poursuite en biostatistique & recherche clinique</li>
+        <li><strong>Impact personnel</strong> : confirmation de mon orientation professionnelle</li>
+      </ul>
+    </section>
+
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+  // Reveal — config net et lisible; ajustez width/height si besoin
+  const deck = new Reveal({
+    hash: true,
+    controls: true,
+    controlsTutorial: false,
+    progress: true,
+    slideNumber: "c/t",
+    showSlideNumber: 'all',
+    transition: 'fade',
+    history: true,
+    hashOneBasedIndex: true,
+    keyboard: true,
+    autoAnimate: true,
+    autoAnimateEasing: 'ease',
+    autoAnimateDuration: 1.0,
+    autoAnimateUnmatched: true,
+    autoAnimateStyles: [
+      'opacity',
+      'color',
+      'background-color',
+      'padding',
+      'font-size',
+      'line-height',
+      'letter-spacing',
+      'border-width',
+      'border-color',
+      'border-radius',
+      'outline',
+      'outline-offset',
+    ],
+    mouseWheel: true,
+    // Pour une netteté maximale sur grand écran, taille auto selon la taille du viewport:
+    width: Math.min(1920, window.innerWidth * 0.85),
+    height: Math.min(1080, window.innerHeight * 0.85),
+    margin: 0.05,
+    minScale: 1, maxScale: 1,
+    plugins: [ RevealHighlight ]
+  });
+  deck.initialize();
+
+  // ECharts — exemple interactif (Mission 2)
+  let chartInstance;
+  function buildChart() {
+    const el = document.getElementById('chart');
+    if (!el) return;
+    if (!chartInstance) {
+      chartInstance = echarts.init(el, null, { renderer: 'svg', devicePixelRatio: window.devicePixelRatio || 1 });
+    }
+    const option = {
+      title: { text: 'Exemple graphique interactif' },
+      tooltip: { trigger: 'axis' },
+      legend: { data: ['Série 1', 'Série 2'] },
+      xAxis: { type: 'category', boundaryGap: false, data: ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'] },
+      yAxis: { type: 'value' },
+      series: [
+        {
+          name: 'Série 1', type: 'line', smooth: true, showSymbol: false,
+          areaStyle: { opacity: 0.15 }, data: [140, 232, 101, 264, 90, 340, 250]
+        },
+        {
+          name: 'Série 2', type: 'line', smooth: true, showSymbol: false,
+          areaStyle: { opacity: 0.15 }, data: [120, 282, 111, 234, 220, 340, 310]
+        }
+      ]
+    };
+    chartInstance.setOption(option);
+  }
+
+  // Construire/redimensionner le graphique au bon moment
+  deck.on('slidechanged', (e) => {
+    if (e.currentSlide && e.currentSlide.querySelector('#chart')) {
+      buildChart();
+      setTimeout(() => chartInstance && chartInstance.resize(), 0);
+    }
+  });
+  window.addEventListener('load', () => {
+    const inView = document.querySelector('#chart');
+    if (inView && inView.offsetParent !== null) buildChart();
+  });
+  window.addEventListener('resize', () => { if (chartInstance) chartInstance.resize(); });
+</script>
+</body>
+</html>
