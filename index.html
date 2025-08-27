@@ -150,19 +150,36 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
 
     <!-- 5. MISSION 2 – 3 slides -->
     <section>
-      <h2>Mission 2 — Rapport d’activité & Newsletter</h2>
-      <h4>Contexte</h4>
-      <ul>
-        <li>Rapport peu lisible, graphiques figés, limites du Rmd classique</li>
-        <li>Objectifs : moderniser, rendre <strong>interactif</strong>, mieux valoriser les données</li>
-      </ul>
-      <img src="ancien_rapport.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
-    </section>
+      <section>
+        <h2>Mission 2 — Rapport d’activité & Newsletter</h2>
+        <h4>Contexte</h4>
+        <ul>
+          <li>Rapport peu lisible, graphiques figés, limites du Rmd classique</li>
+          <li>Objectifs : moderniser, rendre <strong>interactif</strong>, mieux valoriser les données</li>
+        </ul>
+      </section>
+      <section>
+        <h4>Avant</h4>
+        <img src="ancien_rapport.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
+      </section>
+      <section>
+        <h4>Après</h4>
+        <div id="chart" aria-label="Graphique interactif Echarts4R (Apache ECharts)"></div>
+        <p class="caption" style="font-size: 1.2rem;">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
+      </section>
 
-    <section>
+    <!-- <section>
       <h2>Mission 2 — Exemple de dataviz interactive</h2>
       <div id="chart" aria-label="Graphique interactif Apache ECharts"></div>
       <p class="caption">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
+    </section> -->
+    
+    <!-- EXEMPLE — Barres avec Axis Break + Brush (nouvelle slide) -->
+      <section>
+        <h4>Exemple — Axis Break interactif</h4>
+        <div id="dipChart" style="width:100%; height:62vh; max-height:720px; margin-top:6rem;"></div>
+        <p class="caption">Brossez (drag) verticalement pour créer une zone d'axis break. Cliquez sur la zone pour réinitialiser.</p>
+      </section>
     </section>
 
     <section>
@@ -244,7 +261,7 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
     progress: true,
     slideNumber: "c/t",
     showSlideNumber: 'all',
-    transition: 'fade',
+    transition: 'slide',
     history: true,
     hashOneBasedIndex: true,
     keyboard: true,
@@ -304,18 +321,109 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
     chartInstance.setOption(option);
   }
 
-  // Construire/redimensionner le graphique au bon moment
+  // ===== Complexe DIP chart =====
+  let dipInstance;
+  function buildDipChart() {
+    const el = document.getElementById('dipChart');
+    if (!el) return;
+    if (!dipInstance) {
+      dipInstance = echarts.init(el, null, { renderer: 'svg', devicePixelRatio: window.devicePixelRatio || 1 });
+    }
+
+    const years = ['2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'];
+
+    // Données factices par catégorie (DIP)
+    const Bcell =    [120,135,150,170,165,180,190,205,210,220];
+    const Tcell =    [ 80, 85, 92,100, 98,105,112,118,125,130];
+    const Combined = [ 50, 55, 60, 68, 70, 75, 78, 82, 88, 92];
+    const Phago =    [ 40, 42, 45, 47, 46, 50, 53, 55, 57, 60];
+    const Complement=[ 18, 20, 22, 23, 24, 26, 27, 28, 30, 32];
+    const earlyDx =  [ 42, 45, 47, 49, 52, 55, 58, 60, 63, 66]; // % < 2 ans
+
+    const option = {
+      title: { text: 'DIP — Cas annuels par catégorie & % diagnostic précoce' },
+      color: ['#963484','#3066BE','#60AFFF','#28C2FF','#2AF5FF', '#FF5454'],
+      grid: { left: 52, right: 60, top: 80, bottom: 70 },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'cross' },
+        formatter: (params) => {
+          const year = params[0].axisValue;
+          let total = 0; let lines = [];
+          params.forEach(p => { if (p.seriesType === 'bar') total += p.value; });
+          params.forEach(p => {
+            if (p.seriesType === 'bar') {
+              const pct = total ? ((p.value/total)*100).toFixed(1) : 0;
+              lines.push(`${p.marker} ${p.seriesName}: <b>${p.value}</b> (${pct}%)`);
+            } else if (p.seriesType === 'line') {
+              lines.push(`${p.marker} ${p.seriesName}: <b>${p.value}%</b>`);
+            }
+          });
+          return `<b>${year}</b><br/>Total cas: <b>${total}</b><br/>` + lines.join('<br/>');
+        }
+      },
+      legend: { type: 'scroll', top: 40 },
+      toolbox: {
+        feature: {
+          dataZoom: {},
+          dataView: { readOnly: true },
+          restore: {},
+          saveAsImage: {}
+        },
+        right: 10
+      },
+      xAxis: { type: 'category', boundaryGap: true, data: years },
+      yAxis: [
+        { type: 'value', name: 'Cas', min: 0 },
+        { type: 'value', name: '% < 2 ans', min: 0, max: 100 }
+      ],
+      dataZoom: [ { type: 'slider', bottom: 20, start: 0, end: 100 }, { type: 'inside' } ],
+      series: [
+        { name: 'B-cell', type: 'bar', stack: 'cases', emphasis:{ focus:'series' }, data: Bcell },
+        { name: 'T-cell', type: 'bar', stack: 'cases', emphasis:{ focus:'series' }, data: Tcell },
+        { name: 'Combinées', type: 'bar', stack: 'cases', emphasis:{ focus:'series' }, data: Combined },
+        { name: 'Phagocytaires', type: 'bar', stack: 'cases', emphasis:{ focus:'series' }, data: Phago },
+        { name: 'Complément', type: 'bar', stack: 'cases', emphasis:{ focus:'series' }, data: Complement },
+        {
+          name: 'Diagnostic < 2 ans', type: 'line', yAxisIndex: 1, smooth: true,
+          symbol: 'circle', symbolSize: 6, data: earlyDx,
+          areaStyle: { opacity: 0.08 }
+        }
+      ],
+      markArea: {
+        itemStyle: { color: 'rgba(180,180,180,0.15)' },
+        data: [ [ { xAxis: '2019' }, { xAxis: '2020', name: 'Changement de processus' } ] ]
+      }
+    };
+
+    dipInstance.setOption(option);
+  }
+
+  // ===== Events =====
   deck.on('slidechanged', (e) => {
-    if (e.currentSlide && e.currentSlide.querySelector('#chart')) {
-      buildChart();
-      setTimeout(() => chartInstance && chartInstance.resize(), 0);
+    if (e.currentSlide) {
+      if (e.currentSlide.querySelector('#chart')) {
+        buildChart();
+        setTimeout(() => chartInstance && chartInstance.resize(), 0);
+      }
+      if (e.currentSlide.querySelector('#dipChart')) {
+        buildDipChart();
+        setTimeout(() => dipInstance && dipInstance.resize(), 0);
+      }
     }
   });
+
   window.addEventListener('load', () => {
-    const inView = document.querySelector('#chart');
-    if (inView && inView.offsetParent !== null) buildChart();
+    const simple = document.querySelector('#chart');
+    const dip = document.querySelector('#dipChart');
+    if (simple && simple.offsetParent !== null) buildChart();
+    if (dip && dip.offsetParent !== null) buildDipChart();
   });
-  window.addEventListener('resize', () => { if (chartInstance) chartInstance.resize(); });
+
+  window.addEventListener('resize', () => {
+    if (chartInstance) chartInstance.resize();
+    if (dipInstance) dipInstance.resize();
+  });
 </script>
 </body>
 </html>
