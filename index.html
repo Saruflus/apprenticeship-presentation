@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Soutenance d'alternance — Merlin Simsen Baratault</title>
+  <title>Soutenance d'alternance - Merlin Simsen Baratault</title>
 
   <!-- Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -119,7 +119,8 @@
 
     <!-- 6. MISSION 1 (3 slides) -->
     <section>
-      <h2>Mission 1 — Refonte du Data Management</h2>
+      <section>
+      <h2>Mission 1 - Refonte du Data Management</h2>
       <h4>Contexte & objectifs</h4>
       <ul>
         <li>Scripts historiques (~9000 lignes), compilation ~<strong>2h</strong>, erreurs fréquentes</li>
@@ -130,44 +131,46 @@
 
     <!-- 7. MISSION 1 - Avant -->
     <section>
-  <h2>Mission 1 — Avant</h2>
-  <p style="font-size: 0.8em;">Analyse du script existant → remplacer boucles for()</p>
-  <pre><code class="language-r" data-line-numbers="1-13|2|2,5|2,5,7|2,5,7,9"># Boucle lente et fragile
-for (i in 1:nrow(Esid))
-{
-  x &lt; rep(NA, length(IG_date))
-	for (j in &:length(IG_date))
-	{
-	  if (as.character(Esid[i, IG_status[j]]) %in% "Y")
-	  {
-	    Esid$date_first_IG_replacement[i] &lt;- date_ceredih(Esid[i, IG_date[j]])
-	    break()
-	  }
-	}
-}
-</code></pre>
-  <p class="caption">Exemple de code: passages ligne par ligne, boucles imbriquées</p>
-</section>
+    <h2>Mission 1 - Avant</h2>
+    <p style="font-size: 0.8em;">Analyse du script existant → remplacer boucles for()</p>
+    <pre><code class="language-r" data-line-numbers="1-13|2|2,5|2,5,7|2,5,7,9"># Boucle lente et fragile
+  for (i in 1:nrow(Esid))
+  {
+    x &lt; rep(NA, length(IG_date))
+    for (j in &:length(IG_date))
+    {
+      if (as.character(Esid[i, IG_status[j]]) %in% "Y")
+      {
+        Esid$date_first_IG_replacement[i] &lt;- date_ceredih(Esid[i, IG_date[j]])
+        break()
+      }
+    }
+  }
+  </code></pre>
+    <p class="caption">Exemple de code: passages ligne par ligne, boucles imbriquées</p>
+  </section>
 
-    <!-- 8. MISSION 1 - Après -->
-    <section>
-      <h2>Mission 1 — Après</h2>
-      <pre><code class="language-r" data-line-numbers="1-5|2"># Vectorisation claire et robuste
-Esid$date_first_IG_replacement &lt;- mapply(extract_element,
-        which(is.na(Esid$first_ig_replacement)),
-        Esid$first_ig_replacement[which(is.na(Esid$first_ig_replacement))],
-        MoreArgs = list(base = Esid[, IG_date]))
-</code></pre>
-      <ul>
-        <li>Temps total réduit : <strong>~2h → ~15 min</strong></li>
-        <li>Processus plus <strong>fiable</strong> & <strong>maintenable</strong></li>
-        <li>Gain d’<strong>autonomie</strong> & réactivité pour l’équipe</li>
-      </ul>
+      <!-- 8. MISSION 1 - Après -->
+      <section>
+        <h2>Mission 1 - Après</h2>
+        <pre><code class="language-r" data-line-numbers="1-5|2"># Vectorisation claire et robuste
+  Esid$date_first_IG_replacement &lt;- mapply(extract_element,
+          which(is.na(Esid$first_ig_replacement)),
+          Esid$first_ig_replacement[which(is.na(Esid$first_ig_replacement))],
+          MoreArgs = list(base = Esid[, IG_date]))
+  </code></pre>
+        <ul>
+          <li>Temps total réduit : <strong>~2h → ~15 min</strong></li>
+          <li>Processus plus <strong>fiable</strong> & <strong>maintenable</strong></li>
+          <li>Gain d’<strong>autonomie</strong> & réactivité pour l’équipe</li>
+        </ul>
+      </section>
     </section>
+    
 
 
 
-    <!-- 9. MISSION 2 (3-4 slides) -->
+    <!-- 9. MISSION 2 (4 slides) -->
     <section>
       <section>
         <h2>Mission 2 - Rapport d'activité</h2>
@@ -185,6 +188,7 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
         <img src="assets/oldPlot.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
         <p class="caption" style="font-size: 1.2rem;">graphique présentant le nombre d'inclusion par année</p>
       </section>
+
       <!-- 11. MISSION 2 après -->
       <section>
         <h2>Après</h2>
@@ -192,78 +196,131 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
         <p class="caption" style="font-size: 1.2rem;">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
       </section>
       
-
-    <!-- 12. MISSION 2 autre exemple -->
+      <!-- 12. MISSION 2 autre exemple -->
       <section>
         <h4>Autre Exemple</h4>
         <div id="dipChart" style="width:100%; height:62vh; max-height:720px; margin-top:6rem;"></div>
       </section>
+
+      <!-- 13. MISSION 2 résultat -->
+      <section>
+        <h2>Mission 2 - Résultats</h2>
+        <ul>
+          <li>Rapport <strong>interactif</strong> (≈70 pages) - utilisé en congrès</li>
+          <li>Newsletter modernisée & personnalisable</li>
+          <li>Ajout d'analyses (ex. <strong>courbes de survie</strong>)</li>
+          <li>Meilleure valorisation du travail duCEREDIH</li>
+        </ul>
+      </section>
     </section>
 
-    <!-- 13. MISSION 2 résultat -->
+    
+
+
+    
+    <!-- 14. MISSION 3 – Article COX (4 slides)  -->
     <section>
-      <h2>Mission 2 — Résultats</h2>
-      <ul>
-        <li>Rapport <strong>interactif</strong> (≈70 pages) - utilisé en congrès</li>
-        <li>Newsletter modernisée & personnalisable</li>
-        <li>Ajout d'analyses (ex. <strong>courbes de survie</strong>)</li>
-        <li>Meilleure valorisation du travail duCEREDIH</li>
-      </ul>
-    </section>
-
-
-
-    <!-- 14. MISSION 3 – Article COX (3-4 slides)  -->
-    <section>
-      <h2>Mission 3 — Article sur Cox</h2>
-      <p>Article méthodologique sur le modèle de Cox (guide pratique)</p>
-      <ul>
-        <li>Suite du papier sur <em>Kaplan-Meier</em></li>
-        <li>Public: cliniciens non-statisticiens</li>
-        <li>Objectif : expliquer les biais méthodologiques fréquents</li>
-      </ul>
-    </section>
+      <section>
+        <h2>Mission 3 - Article sur Cox</h2>
+        <p>Article méthodologique sur le modèle de Cox (guide pratique)</p>
+        <ul>
+          <li>Suite du papier sur <em>Kaplan-Meier</em></li>
+          <li>Public: cliniciens non-statisticiens</li>
+          <li>Objectif : expliquer les biais méthodologiques fréquents</li>
+        </ul>
+      </section>
 
     <!-- 15. MISSION 3 – Méthode  -->
+      <section>
+        <h2>Méthode</h2>
+        <ul>
+          <li>Simulation données</li>
+          <li>Covariables: binaire (effet réel) + continue (sans effet)</li>
+          <li>Introduction des biais: troncature, censure, risques compétitifs, événements récurrents, intéractions, non-proportionnalité</li>
+          <li>Comparison modèles <strong>naïfs vs corrigés</strong></li>
+        </ul>
+      </section>
+
+      <!-- 16. MISSION 3 – Illustrations -->
+      <section>
+        <!-- <h2>Illustrations</h2> -->
+        <div class="two-col">
+          <img src="assets/COXfalse.png" alt="Figure 1 - Illustration Cox" />
+          <img src="assets/COXtrue.png" alt="Figure 2 - Illustration Cox" />
+        </div>
+        <p class="caption ocenter">Exemple sur l'intéraction, modèle naïf biaisé vs modèle corrigé</p>
+      </section>
+      
+      <!-- 17. MISSION 3 – Résultats  -->
+      <section>
+        <h2>Mission 3 - Résultats</h2>
+        <ul>
+          <li>Article en cours de finalisation</li>
+          <li>Outil pédagogique pour cliniciens</li>
+          <li>Mise à disposition du code</li>
+        </ul>
+      </section>
+    </section>
+
+
+
+    <!-- 18. PORTFOLIO & BILAN – 3 slides -->
     <section>
-      <h2>Mission 3 — Illustrations</h2>
-      <div class="two-col">
-        <img src="article_fig1.png" alt="Figure 1 — Illustration Cox" />
-        <img src="article_fig2.png" alt="Figure 2 — Illustration Cox" />
+      <section>
+        <h2>Portfolio - Compétences du BUT SD</h2>
+        <div class="two-col">
+          <ul>
+            <li><strong>Traiter des données</strong><br>
+              <span style="color:#666;font-size: 1.8rem;">Refonte du Data Management, automatisation, qualité des données</span>
+            </li>
+            <li><strong>Analyser statistiquement</strong><br>
+              <span style="color:#666;font-size: 1.8rem;">Analyses avancées, article sur le modèle de Cox, simulations</span>
+            </li>
+          </ul>
+          <ul>
+            <li><strong>Valoriser une production</strong><br>
+              <span style="color:#666;font-size: 1.8rem;">Rapport d’activité interactif, newsletter modernisée</span>
+            </li>
+            <li><strong>Modéliser les données</strong><br>
+              <span style="color:#666;font-size: 1.8rem;">Modèles de survie, gestion des biais, visualisations pédagogiques</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 19. PORTFOLIO – Compétences transversales -->
+      <section>
+        <h2>Compétences transversales</h2>
+        <ul>
+          <li>Autoformation (survie, simulation, visualisation)</li>
+          <li>Gestion de projet (planification, suivi, évaluation)</li>
+          <li>Communication interdisciplinaire (clinique ↔ data)</li>
+          <li>Travail en équipe et rigueur scientifique</li>
+        </ul>
+      </section>
+
+      <!-- 20. BILAN & PERSPECTIVES (1 slide) -->
+      <section>
+        <h2>Bilan & perspectives</h2>
+        <ul>
+          <li><strong>Techniques</strong> : R, data management, analyse de survie, dataviz interactive</li>
+          <li><strong>Professionnelles</strong> : rigueur, vulgarisation scientifique, travail en équipe médicale</li>
+          <li><strong>Impact personnel</strong> : confirmation de mon orientation professionnelle</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- 21. REMERCIEMENTS (1 slide) -->
+    <section>
+      <h2>Remerciements</h2>
+      <div style="text-align:justify;">
+        <p>Merci à toute l'équipe du CEREDIH pour leur accueil et leur accompagnement</p>
+        <p>Merci à mes encadrants : Mickaël Alligon, Nizar Mahlaoui, François Montestruc</p>
+        <p>Merci aux enseignants du BUT SD et à l'Université Paris Cité</p>
+        <p>Merci à vous pour votre attention !</p>
       </div>
-      <p class="caption center">Remplacez par vos figures (ex. HR, courbes de survie, schémas de biais).</p>
-    </section>
-
-    <!-- 7. PORTFOLIO – 2–3 slides -->
-    <section>
-      <h2>Portfolio — Compétences du BUT SD</h2>
-      <ul>
-        <li><strong>Traiter des données</strong> → refonte du Data Management</li>
-        <li><strong>Analyser statistiquement</strong> → article Cox</li>
-        <li><strong>Valoriser une production</strong> → rapport d’activité / newsletter</li>
-        <li><strong>Modéliser les données</strong> → modèles de survie avancés</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Portfolio — Compétences transversales</h2>
-      <ul>
-        <li>Autoformation & veille</li>
-        <li>Gestion de projet & priorisation</li>
-        <li>Communication interdisciplinaire (clinique ↔ data)</li>
-        <li>Qualité & documentation</li>
-      </ul>
-    </section>
-
-    <!-- 8. BILAN & PERSPECTIVES (1 slide) -->
-    <section>
-      <h2>Bilan & perspectives</h2>
-      <ul>
-        <li><strong>Techniques</strong> : R, data management, analyse de survie, dataviz interactive</li>
-        <li><strong>Professionnelles</strong> : rigueur, vulgarisation scientifique, travail en équipe médicale</li>
-        <li><strong>Perspectives</strong> : poursuite en biostatistique & recherche clinique</li>
-        <li><strong>Impact personnel</strong> : confirmation de mon orientation professionnelle</li>
-      </ul>
+      <br>
+      <h3 style="text-align:center;">Des questions&nbsp;?</h3>
     </section>
 
   </div>
@@ -275,7 +332,7 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 <script>hljs.highlightAll();</script>
 <script>
-  // Reveal — config net et lisible; ajustez width/height si besoin
+  // Reveal - config net et lisible; ajustez width/height si besoin
   const deck = new Reveal({
     hash: true,
     controls: true,
@@ -394,7 +451,7 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
     const earlyDx =  [ 42, 45, 47, 49, 52, 55, 58, 60, 63, 66]; // % < 2 ans
 
     const option = {
-      title: { text: 'DIP — Cas annuels par catégorie & % diagnostic précoce' },
+      title: { text: 'DIP - Cas annuels par catégorie & % diagnostic précoce' },
       color: ['#963484','#3066BE','#60AFFF','#28C2FF','#2AF5FF', '#FF5454'],
       grid: { left: 52, right: 60, top: 80, bottom: 70 },
       tooltip: {
