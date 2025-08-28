@@ -54,67 +54,84 @@
 
 
 
-    <!-- 1. INTRODUCTION (1 slide) -->
+    <!-- 2. INTRODUCTION (1 slide) -->
     <section>
       <h1>Introduction</h1>
+      <p><strong>Merlin Simsen Baratault</strong> - BUT3 Science des Données</p>
       <ul>
-        <li>Présentation : <strong>Merlin Simsen Baratault</strong>, BUT3 Science des Données - alternant</li>
-        <li>Contexte : <strong style="color: #0a4d9d;">CEREDIH</strong> — Hôpital Necker (AP-HP)</li>
-        <li>Encadrants : maître d'alternance & tuteur IUT</li>
+        <li>Alternance de 2 ans au CEREDIH</li>
+        <li>Encadrants : Mickaël Alligon, Nizar Mahlaoui, François Montestruc</li>
         <li>Objectif : présenter mes <strong>missions</strong>, mes <strong>apports</strong>, et les <strong>compétences</strong> développées</li>
       </ul>
     </section>
 
 
 
-    <!-- 2. CEREDIH & Service Data/Stats (2 slides) -->
+    <!-- 3. CEREDIH (1 slides) -->
     <section>
-      <h1 class="r-fit-text">CEREDIH & service Data/Statistique</h1>
+      <h1>LE CEREDIH</h1>
         <div class="two-col">
           <div>
             <ul style="font-size: 1em;">
-              <li>Registre national des <strong style="color: #0a4d9d;">déficits immunitaires</strong></li>
-              <li>Gestion du <strong>réseau</strong> français & participant au niveau européen</li>
-              <li>Valorisation clinique & recherche</li>
+              <li>Crée en 2005 - Plan maladies rares</li>
+              <li>Registre national <strong style="color: #0a4d9d;">> 10 000 patients</strong></li>
+              <li><strong>Réseau français</strong> & européen (ESID)</li>
+              <li>Collecte, analyse, valorisation</li>
             </ul>
-            <p class="caption">Importance de la donnée de santé : qualité, confidentialité, volume</p>
           </div>
           <div>
             <ul style="font-size: 1em;">
               <li>Équipes : ARC, Docteurs, Data</li>
-              <li>Service Data : collecte, QA, analyses, reporting</li>
-              <li>Mon rôle : alternant Data - interface avec l'équipe médicale</li>
+              <li>Mon rôle : alternant Data</li>
             </ul>
           </div>
         </div>
+        <br>
     </section>
 
 
 
-    <!-- 3. Aperçu global des missions (1 slide) -->
+    <!-- 4. Service Data/Statistique (1 slide) -->
+    <section>
+      <h1>Service Data</h1>
+      <ul>
+        <li>2 personnes : Mickaël Alligon (Datamanager / Data analyst), moi (alternant)</li>
+        <li>Rôle : gestion des données, analyses statistiques, valorisation (rapports, articles)</li>
+        <li>Outils : R, R Markdown, Excel, PowerPoint</li>
+      </ul>
+      <p class="caption">Importance de la donnée de santé : qualité, confidentialité, volume</p>
+    </section>
+
+
+
+    <!-- 5. Aperçu global des missions (1 slide) -->
     <section>
       <h2>Aperçu de mes missions</h2>
+      <br>
       <ul>
         <li><strong>Refonte du Data Management</strong> (optimisation, robustesse, lisibilité)</li>
         <li><strong>Modernisation</strong> du rapport d'activité & newsletter</li>
         <li>Rédaction d'un <strong>article méthodologique</strong> sur le modèle de <strong>Cox</strong></li>
       </ul>
-      <p class="caption">→ Focus détaillé : missions 1 & 2 • L'article en point fort final</p>
     </section>
 
-    <!-- 4. MISSION 1 – 3 slides -->
+
+
+    <!-- 6. MISSION 1 (3 slides) -->
     <section>
       <h2>Mission 1 — Refonte du Data Management</h2>
       <h4>Contexte & objectifs</h4>
       <ul>
         <li>Scripts historiques (~9000 lignes), compilation ~<strong>2h</strong>, erreurs fréquentes</li>
         <li>Objectifs : <strong>rapidité</strong>, <strong>robustesse</strong>, <strong>lisibilité</strong></li>
-        <li>Démarche : analyse, <em>vectorisation</em> (apply/mapply), modularisation</li>
       </ul>
     </section>
 
+
+    <!-- 7. MISSION 1 - Avant -->
     <section>
   <h2>Mission 1 — Avant</h2>
+  <p style="font-size: 0.8em;">Analyse du script existant → remplacer boucles for()</p>
   <pre><code class="language-r" data-line-numbers="1-13|2|2,5|2,5,7|2,5,7,9"># Boucle lente et fragile
 for (i in 1:nrow(Esid))
 {
@@ -129,10 +146,10 @@ for (i in 1:nrow(Esid))
 	}
 }
 </code></pre>
-  <p class="caption">Problèmes : passages cellule par cellule, conditions répétitives, risques d'erreurs d'indexation.</p>
+  <p class="caption">Exemple de code: passages ligne par ligne, boucles imbriquées</p>
 </section>
 
-
+    <!-- 8. MISSION 1 - Après -->
     <section>
       <h2>Mission 1 — Après</h2>
       <pre><code class="language-r" data-line-numbers="1-5|2"># Vectorisation claire et robuste
@@ -148,61 +165,66 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
       </ul>
     </section>
 
-    <!-- 5. MISSION 2 – 3 slides -->
+
+
+    <!-- 9. MISSION 2 (3-4 slides) -->
     <section>
       <section>
-        <h2>Mission 2 — Rapport d’activité & Newsletter</h2>
+        <h2>Mission 2 - Rapport d'activité</h2>
         <h4>Contexte</h4>
+        <br>
         <ul>
-          <li>Rapport peu lisible, graphiques figés, limites du Rmd classique</li>
+          <li>Peu lisible, graphiques figés, limites du format classique</li>
           <li>Objectifs : moderniser, rendre <strong>interactif</strong>, mieux valoriser les données</li>
         </ul>
       </section>
+      
+      <!-- 10. MISSION 2 avant -->
       <section>
-        <h4>Avant</h4>
-        <img src="ancien_rapport.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
+        <h2>Avant</h2>
+        <img src="assets/oldPlot.png" alt="Ancien rapport" style="max-height:56vh; margin-top:.8rem; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.08);" />
+        <p class="caption" style="font-size: 1.2rem;">graphique présentant le nombre d'inclusion par année</p>
       </section>
+      <!-- 11. MISSION 2 après -->
       <section>
-        <h4>Après</h4>
-        <div id="chart" aria-label="Graphique interactif Echarts4R (Apache ECharts)"></div>
+        <h2>Après</h2>
+        <div id="afterChart" class="center" style="width: 80%; height: 400px; margin: 0 auto; display: flex; justify-content: center; align-items: center;" aria-label="Graphique interactif Echarts4R (Apache ECharts)"></div>
         <p class="caption" style="font-size: 1.2rem;">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
       </section>
+      
 
-    <!-- <section>
-      <h2>Mission 2 — Exemple de dataviz interactive</h2>
-      <div id="chart" aria-label="Graphique interactif Apache ECharts"></div>
-      <p class="caption">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
-    </section> -->
-    
-    <!-- EXEMPLE — Barres avec Axis Break + Brush (nouvelle slide) -->
+    <!-- 12. MISSION 2 autre exemple -->
       <section>
-        <h4>Exemple — Axis Break interactif</h4>
+        <h4>Autre Exemple</h4>
         <div id="dipChart" style="width:100%; height:62vh; max-height:720px; margin-top:6rem;"></div>
-        <p class="caption">Brossez (drag) verticalement pour créer une zone d'axis break. Cliquez sur la zone pour réinitialiser.</p>
       </section>
     </section>
 
+    <!-- 13. MISSION 2 résultat -->
     <section>
       <h2>Mission 2 — Résultats</h2>
       <ul>
-        <li>Rapport <strong>interactif</strong> (≈70 pages) — utilisé en congrès</li>
+        <li>Rapport <strong>interactif</strong> (≈70 pages) - utilisé en congrès</li>
         <li>Newsletter modernisée & personnalisable</li>
-        <li>Ajout d’analyses (ex. <strong>courbes de survie</strong>)</li>
-        <li>Meilleure valorisation auprès des médecins & partenaires</li>
+        <li>Ajout d'analyses (ex. <strong>courbes de survie</strong>)</li>
+        <li>Meilleure valorisation du travail duCEREDIH</li>
       </ul>
     </section>
 
-    <!-- 6. MISSION 3 – 2 slides (2 images requis) -->
+
+
+    <!-- 14. MISSION 3 – Article COX (3-4 slides)  -->
     <section>
-      <h2>Mission 3 — Article méthodologique (modèle de Cox)</h2>
+      <h2>Mission 3 — Article sur Cox</h2>
+      <p>Article méthodologique sur le modèle de Cox (guide pratique)</p>
       <ul>
-        <li>Suite d’un papier sur <em>Kaplan‑Meier</em> → besoin d’un guide clair pour cliniciens</li>
-        <li>Objectifs : expliquer biais (troncature, censure, risques compétitifs, événements récurrents, interactions…)</li>
-        <li>Méthode : simulation (Weibull), comparaison modèles naïfs vs corrigés, illustrations (HR & courbes)</li>
-        <li>Résultat : article en cours de finalisation • gain d’expertise méthodo & communication scientifique</li>
+        <li>Suite du papier sur <em>Kaplan-Meier</em></li>
+        <li>Public: cliniciens non-statisticiens</li>
+        <li>Objectif : expliquer les biais méthodologiques fréquents</li>
       </ul>
     </section>
 
+    <!-- 15. MISSION 3 – Méthode  -->
     <section>
       <h2>Mission 3 — Illustrations</h2>
       <div class="two-col">
@@ -293,32 +315,63 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
   });
   deck.initialize();
 
-  // ECharts — exemple interactif (Mission 2)
-  let chartInstance;
-  function buildChart() {
-    const el = document.getElementById('chart');
+  // ===== After chart (stacked like screenshot) =====
+  let afterInstance;
+  function buildAfterChart() {
+    const el = document.getElementById('afterChart');
     if (!el) return;
-    if (!chartInstance) {
-      chartInstance = echarts.init(el, null, { renderer: 'svg', devicePixelRatio: window.devicePixelRatio || 1 });
+    if (!afterInstance) {
+      afterInstance = echarts.init(el, null, { renderer: 'svg', devicePixelRatio: window.devicePixelRatio || 1 });
     }
+
+    const years = [
+      '2005','2006','2007','2008','2009','2010','2011','2012','2013','2014',
+      '2015','2016','2017','2018','2019','2020','2021','2022','2023','2024'
+    ];
+
+    // Données approximatives (à remplacer par tes vraies valeurs)
+    const segGrey  = [520,470,820,430,360,420,520,380,340,360,420,320,260,290,310,260,300,340,360,330];
+    const segYellow= [150,130,170,180,140, 80, 70,110, 90,120,130, 60, 40, 50, 70, 40, 60, 70, 80, 60];
+    const segBlue  = [ 60, 80, 90, 40, 70, 30, 40, 70, 50, 60, 70, 40, 30, 40, 30, 30, 40, 70, 70, 40];
+
     const option = {
-      title: { text: 'Exemple graphique interactif' },
-      tooltip: { trigger: 'axis' },
-      legend: { data: ['Série 1', 'Série 2'] },
-      xAxis: { type: 'category', boundaryGap: false, data: ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'] },
-      yAxis: { type: 'value' },
-      series: [
-        {
-          name: 'Série 1', type: 'line', smooth: true, showSymbol: false,
-          areaStyle: { opacity: 0.15 }, data: [140, 232, 101, 264, 90, 340, 250]
-        },
-        {
-          name: 'Série 2', type: 'line', smooth: true, showSymbol: false,
-          areaStyle: { opacity: 0.15 }, data: [120, 282, 111, 234, 220, 340, 310]
+      title: { text: 'Nombre de patients par année', left: 'center' },
+      color: ['#9e9e9e', '#f2c94c', '#1f78b4'],
+      grid: { left: 60, right: 30, top: 60, bottom: 80 },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        formatter: (params) => {
+          const year = params[0].axisValue;
+          let total = 0;
+          params.forEach(p => total += p.value);
+          const lines = params.map(p => {
+            const pct = total ? ((p.value / total) * 100).toFixed(1) : 0;
+            return `${p.marker} ${p.seriesName}: <b>${p.value}</b> (${pct}%)`;
+          });
+          return `<b>${year}</b><br/>Total: <b>${total}</b><br/>` + lines.join('<br/>');
         }
+      },
+      legend: { top: 28, left: 10, itemWidth: 14 },
+      xAxis: {
+        type: 'category',
+        data: years,
+        axisLabel: { rotate: 0, interval: 0 }
+      },
+      yAxis: {
+        type: 'value',
+        name: '',
+        min: 0,
+        max: 1250
+      },
+      series: [
+        { name: 'Prevalent cases',   type: 'bar', stack: 'patients', data: segGrey,   barWidth: '70%', emphasis: { focus: 'series' } },
+        { name: 'Included deceased',  type: 'bar', stack: 'patients', data: segYellow, emphasis: { focus: 'series' } },
+        { name: 'Incident cases',   type: 'bar', stack: 'patients', data: segBlue,   emphasis: { focus: 'series' } }
       ]
     };
-    chartInstance.setOption(option);
+
+    afterInstance.setOption(option);
   }
 
   // ===== Complexe DIP chart =====
@@ -402,9 +455,9 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
   // ===== Events =====
   deck.on('slidechanged', (e) => {
     if (e.currentSlide) {
-      if (e.currentSlide.querySelector('#chart')) {
-        buildChart();
-        setTimeout(() => chartInstance && chartInstance.resize(), 0);
+      if (e.currentSlide.querySelector('#afterChart')) {
+        buildAfterChart();
+        setTimeout(() => afterInstance && afterInstance.resize(), 0);
       }
       if (e.currentSlide.querySelector('#dipChart')) {
         buildDipChart();
@@ -414,14 +467,14 @@ Esid$date_first_IG_replacement &lt;- mapply(extract_element,
   });
 
   window.addEventListener('load', () => {
-    const simple = document.querySelector('#chart');
+    const simple = document.querySelector('#afterChart');
     const dip = document.querySelector('#dipChart');
-    if (simple && simple.offsetParent !== null) buildChart();
+    if (simple && simple.offsetParent !== null) buildAfterChart();
     if (dip && dip.offsetParent !== null) buildDipChart();
   });
 
   window.addEventListener('resize', () => {
-    if (chartInstance) chartInstance.resize();
+    if (afterInstance) afterInstance.resize();
     if (dipInstance) dipInstance.resize();
   });
 </script>
