@@ -110,7 +110,7 @@
       <br>
       <ul>
         <li><strong>Refonte du Data Management</strong> (optimisation, robustesse, lisibilité)</li>
-        <li><strong>Modernisation</strong> du rapport d'activité & newsletter</li>
+        <li><strong>Modernisation</strong> du rapport d'activité</li>
         <li>Rédaction d'un <strong>article méthodologique</strong> sur le modèle de <strong>Cox</strong></li>
       </ul>
     </section>
@@ -162,7 +162,7 @@
         <ul>
           <li>Temps total réduit : <strong>~2h → ~15 min</strong></li>
           <li>Processus plus <strong>fiable</strong> & <strong>maintenable</strong></li>
-          <li>Gain d’<strong>autonomie</strong> & réactivité pour l’équipe</li>
+          <li>Gain de <strong>temps</strong></li>
         </ul>
       </section>
     </section>
@@ -192,15 +192,15 @@
       <!-- 11. MISSION 2 après -->
       <section>
         <h2>Après</h2>
-        <div id="afterChart" class="center" style="width: 80%; height: 400px; margin: 0 auto; display: flex; justify-content: center; align-items: center;" aria-label="Graphique interactif Echarts4R (Apache ECharts)"></div>
-        <p class="caption" style="font-size: 1.2rem;">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p>
+        <div id="afterChart" class="center" style="width: 80%; height: 500px; margin: 0 auto; display: flex; justify-content: center; align-items: center;" aria-label="Graphique interactif Echarts4R (Apache ECharts)"></div>
+        <!-- <p class="caption" style="font-size: 1.2rem;">Hover : détails • Légende : afficher/masquer • Toolbox : enregistrer en image</p> -->
       </section>
       
       <!-- 12. MISSION 2 autre exemple -->
-      <section>
+      <!-- <section>
         <h4>Autre Exemple</h4>
         <div id="dipChart" style="width:100%; height:62vh; max-height:720px; margin-top:6rem;"></div>
-      </section>
+      </section> -->
 
       <!-- 13. MISSION 2 résultat -->
       <section>
@@ -244,11 +244,11 @@
       <!-- 16. MISSION 3 – Illustrations -->
       <section>
         <!-- <h2>Illustrations</h2> -->
-        <div class="two-col">
-          <img src="assets/COXfalse.png" alt="Figure 1 - Illustration Cox" />
-          <img src="assets/COXtrue.png" alt="Figure 2 - Illustration Cox" />
-        </div>
         <p class="caption ocenter">Exemple sur l'intéraction, modèle naïf biaisé vs modèle corrigé</p>
+        <div class="two-col">
+          <img src="assets/COXfalse.png" alt="Figure 1 - Illustration Cox" class="fragment"/>
+          <img src="assets/COXtrue.png" alt="Figure 2 - Illustration Cox" class="fragment"/>
+        </div>
       </section>
       
       <!-- 17. MISSION 3 – Résultats  -->
@@ -256,8 +256,8 @@
         <h2>Mission 3 - Résultats</h2>
         <ul>
           <li>Article en cours de finalisation</li>
-          <li>Outil pédagogique pour cliniciens</li>
-          <li>Mise à disposition du code</li>
+          <li>Outil pédagogique pour cliniciens - open source</li>
+          <li>simulation de données complexe, survie, rédaction scientfique, gestion de projet</li>
         </ul>
       </section>
     </section>
@@ -410,6 +410,7 @@
         }
       },
       legend: { top: 28, left: 10, itemWidth: 14 },
+      dataZoom: [ { type: 'slider', bottom: 20, start: 0, end: 100 }, { type: 'inside' } ],
       xAxis: {
         type: 'category',
         data: years,
